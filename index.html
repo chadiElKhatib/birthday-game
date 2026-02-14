@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="da">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Birthday Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app" aria-label="Fødselsdagsspil">
+      <header class="topbar">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">🎈</span>
+          <div>
+            <h1>Ballon Pop</h1>
+            <p class="subtitle">Vind og lås fødselsdagsoverraskelsen op!</p>
+          </div>
+        </div>
+
+        <div class="hud" role="status" aria-live="polite">
+          <div class="pill">
+            <span>Mål:</span> <strong id="goalText">15</strong>
+          </div>
+          <div class="pill">
+            <span>Poppet:</span> <strong id="poppedText">0</strong>
+          </div>
+          <div class="pill">
+            <span>Tid:</span> <strong id="timeText">25</strong>s
+          </div>
+        </div>
+      </header>
+
+      <section class="card rules" aria-label="Spilleregler">
+        <h2>Spilleregler</h2>
+        <ul>
+          <li>Pop <strong id="goalText2">30</strong> balloner.</li>
+          <li>Du har <strong id="timeText2">10</strong> sekunder.</li>
+          <li>Klik/tryk på ballonerne for at poppe dem.</li>
+          <li>Når du vinder, får du en særlig overraskelse 🎉</li>
+        </ul>
+
+        <div class="actions">
+          <button id="startBtn" class="btn primary">Start spil</button>
+          <button id="restartBtn" class="btn" disabled>Restart</button>
+        </div>
+      </section>
+
+      <section class="playAreaWrap" aria-label="Spilområde">
+        <div
+          class="playArea"
+          id="playArea"
+          aria-label="Tryk på ballonerne"
+        ></div>
+        <p class="hint">
+          Tip: På mobil kan du bare trykke. På PC kan du klikke.
+        </p>
+      </section>
+    </main>
+
+    <!-- WIN OVERLAY -->
+    <section class="winOverlay" id="winOverlay" aria-hidden="true">
+      <div
+        class="winContent"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Du vandt!"
+      >
+        <div class="balloonRow" aria-hidden="true">
+          <span class="b">🎈</span><span class="b">🎈</span
+          ><span class="b">🎈</span> <span class="b">🎈</span
+          ><span class="b">🎈</span><span class="b">🎈</span>
+        </div>
+
+        <h2 class="bigText">Tillykke med fødselsdagen Nadin! 🥳</h2>
+        <p class="smallText">
+          Du klarede det! Håber du får en fantastisk dag 💛
+        </p>
+
+        <div class="winButtons">
+          <button id="playAgainBtn" class="btn primary">Spil igen</button>
+          <button id="closeWinBtn" class="btn">Luk</button>
+        </div>
+      </div>
+
+      <!-- Confetti (CSS-animeret) -->
+      <div class="confetti" aria-hidden="true" id="confetti"></div>
+      <!-- Flyvende balloner (CSS-animeret) -->
+      <div
+        class="floatingBalloons"
+        aria-hidden="true"
+        id="floatingBalloons"
+      ></div>
+    </section>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
