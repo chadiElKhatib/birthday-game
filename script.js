@@ -1,4 +1,4 @@
-const GOAL = 30;           // antal balloner
+const GOAL = 25;           // antal balloner
 const GAME_SECONDS = 20;   // sekunder til ballonspillet
 const QUIZ_TOTAL = 6;      // 6 rigtige i træk
 const QUIZ_SECONDS = 30;  // 3 sekunder pr spørgsmål
