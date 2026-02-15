@@ -3,29 +3,45 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Happy Birthday Game</title>
+    <title>Birthday Game</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="app" aria-label="Fødselsdagsspil">
+    <!-- INTRO SCREEN -->
+    <section class="screen show" id="introScreen" aria-label="Intro">
+      <div class="panel">
+        <h1 class="title">Hey Nadin 🎈</h1>
+        <p class="typewriter" id="typeText"></p>
+
+        <div class="row">
+          <button class="btn primary" id="skipIntroBtn">Skip</button>
+          <button class="btn" id="startFromIntroBtn" disabled>
+            Start spil 🎮
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAME SCREEN -->
+    <main class="app screen" id="gameScreen" aria-label="Spil">
       <header class="topbar">
         <div class="brand">
           <span class="logo" aria-hidden="true">🎈</span>
           <div>
             <h1>Ballon Pop</h1>
-            <p class="subtitle">Vind og lås fødselsdagsoverraskelsen op!</p>
+            <p class="subtitle">Pop ballonerne før tiden løber ud!</p>
           </div>
         </div>
 
         <div class="hud" role="status" aria-live="polite">
           <div class="pill">
-            <span>Mål:</span> <strong id="goalText">15</strong>
+            <span>Mål:</span> <strong id="goalText">30</strong>
           </div>
           <div class="pill">
             <span>Poppet:</span> <strong id="poppedText">0</strong>
           </div>
           <div class="pill">
-            <span>Tid:</span> <strong id="timeText">25</strong>s
+            <span>Tid:</span> <strong id="timeText">20</strong>s
           </div>
         </div>
       </header>
@@ -34,9 +50,9 @@
         <h2>Spilleregler</h2>
         <ul>
           <li>Pop <strong id="goalText2">30</strong> balloner.</li>
-          <li>Du har <strong id="timeText2">10</strong> sekunder.</li>
+          <li>Du har <strong id="timeText2">20</strong> sekunder.</li>
           <li>Klik/tryk på ballonerne for at poppe dem.</li>
-          <li>Når du vinder, får du en særlig overraskelse 🎉</li>
+          <li>Vind for at låse quiz + gave op 🎁</li>
         </ul>
 
         <div class="actions">
@@ -57,7 +73,7 @@
       </section>
     </main>
 
-    <!-- WIN OVERLAY -->
+    <!-- WIN SCREEN -->
     <section class="winOverlay" id="winOverlay" aria-hidden="true">
       <div
         class="winContent"
@@ -71,25 +87,99 @@
           ><span class="b">🎈</span><span class="b">🎈</span>
         </div>
 
-        <h2 class="bigText">Tillykke med fødselsdagen Nadin! 🥳</h2>
+        <h2 class="bigText rainbow">Tillykke med fødselsdagen Nadin! 🥳🎂</h2>
+
         <p class="smallText">
-          Du klarede det! Håber du får en fantastisk dag 💛
+          In’shaa’allah du får en mega god dag med familien 💛<br />
+          <span class="arabizi">Allah ykhaliki w y3tik sa3ada w twfeeq 💫</span
+          ><br />
+          (og ja… du er stadig min bedste veninde 😤😂)
         </p>
 
+        <p class="scoreLine" id="scoreLine"></p>
+        <p class="scoreLine" id="bestLine"></p>
+
         <div class="winButtons">
-          <button id="playAgainBtn" class="btn primary">Spil igen</button>
-          <button id="closeWinBtn" class="btn">Luk</button>
+          <button id="playAgainBtn" class="btn">Spil igen 😏</button>
+          <button id="toQuizBtn" class="btn primary">Få din gave 🎁</button>
         </div>
       </div>
 
-      <!-- Confetti (CSS-animeret) -->
       <div class="confetti" aria-hidden="true" id="confetti"></div>
-      <!-- Flyvende balloner (CSS-animeret) -->
       <div
         class="floatingBalloons"
         aria-hidden="true"
         id="floatingBalloons"
       ></div>
+    </section>
+
+    <!-- QUIZ SCREEN -->
+    <section class="screen" id="quizScreen" aria-label="Quiz">
+      <div class="panel">
+        <h2 class="title">Sidste step: Quiz 🧠</h2>
+        <p class="muted">
+          Du har <strong>30 sek</strong> per spørgsmål. Forkert eller tid
+          udløber → tilbage til start 😈
+        </p>
+
+        <div class="quizBox">
+          <div class="quizTop">
+            <div class="progressWrap" aria-label="Quiz progress">
+              <div class="progressBar">
+                <div class="progressFill" id="progressFill"></div>
+              </div>
+              <div class="progressText">
+                <strong id="progressText">0</strong>/6
+              </div>
+            </div>
+
+            <div class="pill">
+              <span>Spørgsmål:</span> <strong id="qIndex">1</strong>/6
+            </div>
+            <div class="pill">
+              <span>Tid:</span> <strong id="qTime">15</strong>s
+            </div>
+          </div>
+
+          <h3 class="question" id="qText"></h3>
+          <div class="answers" id="answers"></div>
+
+          <p class="quizHint" id="quizHint"></p>
+        </div>
+
+        <div class="row">
+          <button class="btn" id="quitQuizBtn">Tilbage til start</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIFT SCREEN -->
+    <section class="screen" id="giftScreen" aria-label="Gave">
+      <h2 class="bigText rainbow">Du klarede det!! 🎁✨</h2>
+      <p class="smallText">Okay… nu kommer gaven 😏</p>
+
+      <div class="giftGrid" id="giftGrid" aria-label="Gaver">
+        <button class="giftBox" data-gift="1" aria-label="Åbn gave 1">
+          <div class="giftEmoji">🎁</div>
+          <div class="giftLabel">Åbn gave 1</div>
+        </button>
+
+        <button class="giftBox" data-gift="2" aria-label="Åbn gave 2">
+          <div class="giftEmoji">🎁</div>
+          <div class="giftLabel">Åbn gave 2</div>
+        </button>
+
+        <button class="giftBox" data-gift="3" aria-label="Åbn gave 3">
+          <div class="giftEmoji">🎁</div>
+          <div class="giftLabel">Åbn gave 3</div>
+        </button>
+      </div>
+
+      <div class="giftResult" id="giftResult"></div>
+
+      <div class="row">
+        <button class="btn primary" id="restartAllBtn">Start forfra</button>
+      </div>
     </section>
 
     <script src="script.js" defer></script>
